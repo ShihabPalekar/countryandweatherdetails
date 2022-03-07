@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./styles/app.css"
+import { Routes, Route, useSearchParams } from "react-router-dom"
+import Info from "./pages/Info"
+import InputForm from "./pages/InputForm"
+import { useNavigate } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App : React.FC = () => {
+  const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+
+  return(
+    <div className="app">
+            <Routes >
+                <Route path="/info" element={<Info searchParams={searchParams} navigate={navigate} />} />
+                <Route path="/" element={<InputForm navigate={navigate}/>} />
+            </Routes>
     </div>
-  );
+  )
 }
 
 export default App;
