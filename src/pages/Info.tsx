@@ -1,6 +1,7 @@
 import {
   Button,
   Table,
+  TableBody,
   TableCell,
   TableContainer,
   TableRow,
@@ -28,12 +29,17 @@ const Info: React.FC<Props> = ({ ...props }) => {
   const [data, setData] = useState<any[]>([]);
   const [weatherData, setWeatherData]: any = useState({});
   const [capital, setCapital] = useState("");
+  const [error, setError] = useState(false);
 
   const fetchData = async (name: string) => {
-    const response = await fetch(`https://restcountries.com/v2/name//${name}`);
-    const data = await response.json();
-    setData(data);
-    setCapital(data[0].capital);
+    try{
+      const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+      const data = await response.json();
+      setData(data);
+      setCapital(data[0].capital);
+    } catch (error) {
+      setError(true)
+    }
   };
 
   useEffect(() => {
@@ -53,6 +59,7 @@ const Info: React.FC<Props> = ({ ...props }) => {
   const backToForm = () => {
     props.navigate("/");
   };
+  console.log(error)
 
   return (
     <div className="info-container">
@@ -63,38 +70,40 @@ const Info: React.FC<Props> = ({ ...props }) => {
           </Button>
           <TableContainer>
             <Table sx={{ minWidth: 650 }}>
-              <TableRow>
-                <TableCell component="th" scope="row">
-                  Capital
-                </TableCell>
-                <TableCell align="right">{data[0].capital}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">
-                  Population
-                </TableCell>
-                <TableCell align="right">{data[0].population}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">
-                  Lat/Lng
-                </TableCell>
-                <TableCell align="right">
-                  {data[0].latlng[0]} / {data[0].latlng[1]}
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell component="th" scope="row">
-                  Flag
-                </TableCell>
-                <TableCell align="right">
-                  <img
-                    style={{ width: "60px", height: "30px" }}
-                    alt={"flag-icon"}
-                    src={data[0].flag}
-                  />
-                </TableCell>
-              </TableRow>
+              <TableBody>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    Capital
+                  </TableCell>
+                  <TableCell align="right">{data[0].capital}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    Population
+                  </TableCell>
+                  <TableCell align="right">{data[0].population}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    Lat/Lng
+                  </TableCell>
+                  <TableCell align="right">
+                    {data[0].latlng[0]} / {data[0].latlng[1]}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    Flag
+                  </TableCell>
+                  <TableCell align="right">
+                    <img
+                      style={{ width: "60px", height: "30px" }}
+                      alt={"flag-icon"}
+                      src={data[0].flags.svg}
+                    />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
             </Table>
           </TableContainer>
           <Button
@@ -111,48 +120,51 @@ const Info: React.FC<Props> = ({ ...props }) => {
           >
             <TableContainer>
               <Table sx={{ minWidth: 650 }}>
-                <TableRow>
-                  <TableCell component="th" scope="row">
-                    Temperature
-                  </TableCell>
-                  <TableCell align="right">
-                    {weatherData.current !== undefined &&
-                      weatherData.current.temperature}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">
-                    Weather Icon
-                  </TableCell>
-                  <TableCell align="right">
-                    <img
-                      style={{ width: "30px", height: "30px" }}
-                      alt={"weather-icon"}
-                      src={
-                        weatherData.current !== undefined &&
-                        weatherData.current.weather_icons
-                      }
-                    />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">
-                    Wind Speed
-                  </TableCell>
-                  <TableCell align="right">
-                    {weatherData.current !== undefined &&
-                      weatherData.current.wind_speed}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell component="th" scope="row">
-                    Precip
-                  </TableCell>
-                  <TableCell align="right">
-                    {weatherData.current !== undefined &&
-                      weatherData.current.precip}
-                  </TableCell>
-                </TableRow>
+                <TableBody>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Temperature
+                    </TableCell>
+                    <TableCell align="right">
+                      {weatherData.current !== undefined &&
+                        weatherData.current.temperature}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Weather Icon
+                    </TableCell>
+                    <TableCell align="right">
+                      <img
+                        style={{ width: "30px", height: "30px" }}
+                        alt={"weather-icon"}
+                        src={
+                          weatherData.current !== undefined
+                            ? weatherData.current.weather_icons
+                            : ""
+                        }
+                      />
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Wind Speed
+                    </TableCell>
+                    <TableCell align="right">
+                      {weatherData.current !== undefined &&
+                        weatherData.current.wind_speed}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Precip
+                    </TableCell>
+                    <TableCell align="right">
+                      {weatherData.current !== undefined &&
+                        weatherData.current.precip}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
               </Table>
             </TableContainer>
           </div>
