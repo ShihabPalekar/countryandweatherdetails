@@ -14,6 +14,7 @@ const InputForm: React.FC<Props> = ({ ...props }) => {
   };
 
   const buttonClicked = () => {
+    setCountryName("")
     props.navigate("/info?countryName=" + countryName);
   };
 

@@ -16,9 +16,10 @@ describe("Input Form component", () => {
     render(<InputForm navigate={undefined} />);
   });
 
-  test("input field for country exists", () => {
+  test("country input exists", () => {
     render(<InputForm navigate={undefined} />);
-    expect(screen.getByRole("input-field-country")).toBeInTheDocument();
+    const inputElement = screen.getByLabelText(/Country name/i)
+    expect(inputElement).toBeInTheDocument();
   });
 
   test("search-button exists", () => {
@@ -29,6 +30,22 @@ describe("Input Form component", () => {
   test("search-button is disabled initially", () => {
     render(<InputForm navigate={undefined} />);
     expect(screen.getByRole("search-button")).toBeDisabled();
+  });
+
+  test("value of country input changes when typed in", () => {
+    render(<InputForm navigate={undefined} />);
+    const inputElement = screen.getByLabelText(/Country name/i) as HTMLInputElement
+    fireEvent.change(inputElement, {target: {value: "India"}})
+    expect(inputElement.value).toBe("India");
+  });
+
+  test("value of country input is empty when typed search button is clicked", () => {
+    render(<InputForm navigate={() => {}} />);
+    const inputElement = screen.getByLabelText(/Country name/i) as HTMLInputElement
+    const buttonElement = screen.getByRole("search-button")
+    fireEvent.change(inputElement, {target: {value: "India"}})
+    fireEvent.click(buttonElement)
+    expect(inputElement.value).toBe("");
   });
 
 });

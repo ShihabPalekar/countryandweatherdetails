@@ -59,7 +59,7 @@ const Info: React.FC<Props> = ({ ...props }) => {
   };
 
   const backToForm = () => {
-    props.navigate("/");
+    props.navigate(-1);
   };
 
   return (
