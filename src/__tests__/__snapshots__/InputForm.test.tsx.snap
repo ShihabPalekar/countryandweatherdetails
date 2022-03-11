@@ -6,6 +6,7 @@ exports[`input form page renders correctly 1`] = `
 >
   <div
     className="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
+    role="input-field-country"
   >
     <label
       className="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-standard MuiFormLabel-root MuiFormLabel-colorPrimary css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root"
@@ -51,6 +52,7 @@ exports[`input form page renders correctly 1`] = `
     onTouchEnd={[Function]}
     onTouchMove={[Function]}
     onTouchStart={[Function]}
+    role="search-button"
     tabIndex={-1}
     type="button"
   >

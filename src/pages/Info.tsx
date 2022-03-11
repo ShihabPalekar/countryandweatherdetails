@@ -32,13 +32,15 @@ const Info: React.FC<Props> = ({ ...props }) => {
   const [error, setError] = useState(false);
 
   const fetchData = async (name: string) => {
-    try{
-      const response = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+    try {
+      const response = await fetch(
+        `https://restcountries.com/v3.1/name/${name}`
+      );
       const data = await response.json();
       setData(data);
       setCapital(data[0].capital);
     } catch (error) {
-      setError(true)
+      setError(true);
     }
   };
 
@@ -59,7 +61,6 @@ const Info: React.FC<Props> = ({ ...props }) => {
   const backToForm = () => {
     props.navigate("/");
   };
-  console.log(error)
 
   return (
     <div className="info-container">

@@ -25,11 +25,13 @@ const InputForm: React.FC<Props> = ({ ...props }) => {
         variant="standard"
         onChange={handleInputChange}
         value={countryName}
+        role='input-field-country'
       />
       <Button
         disabled={countryName.trim() === ""}
         variant="contained"
         onClick={buttonClicked}
+        role="search-button"
       >
         Search
       </Button>
