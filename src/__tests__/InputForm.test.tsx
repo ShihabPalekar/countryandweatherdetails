@@ -7,7 +7,6 @@ import InputForm from "../pages/InputForm";
 test("input form page renders correctly", () => {
   const component = renderer.create(<InputForm navigate={undefined} />);
   let tree = component.toJSON();
-  // tree
   expect(tree).toMatchSnapshot();
 });
 
@@ -47,5 +46,5 @@ describe("Input Form component", () => {
     fireEvent.click(buttonElement)
     expect(inputElement.value).toBe("");
   });
-
+  
 });

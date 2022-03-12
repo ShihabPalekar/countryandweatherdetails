@@ -1,3 +1,10 @@
 .info-container{
     margin-top: 20px;
 }
+
+.loader{
+    margin-top: 47vh;
+    margin-left: 47vw;
+    color: blue;
+    opacity: 0.5;
+}

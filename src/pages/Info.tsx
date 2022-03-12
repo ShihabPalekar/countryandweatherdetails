@@ -26,6 +26,7 @@ type Props = {
 };
 
 const Info: React.FC<Props> = ({ ...props }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
   const [weatherData, setWeatherData]: any = useState({});
   const [capital, setCapital] = useState("");
@@ -39,6 +40,7 @@ const Info: React.FC<Props> = ({ ...props }) => {
       const data = await response.json();
       setData(data);
       setCapital(data[0].capital);
+      setIsLoading(false);
     } catch (error) {
       setError(true);
     }
@@ -61,6 +63,10 @@ const Info: React.FC<Props> = ({ ...props }) => {
   const backToForm = () => {
     props.navigate(-1);
   };
+
+  if (isLoading) {
+    return <p className="loader">loading...</p>;
+  }
 
   return (
     <div className="info-container">
