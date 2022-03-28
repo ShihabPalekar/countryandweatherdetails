@@ -42,6 +42,7 @@ const Info: React.FC<Props> = ({ ...props }) => {
       setCapital(data[0].capital);
       setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setError(true);
     }
   };
@@ -66,6 +67,20 @@ const Info: React.FC<Props> = ({ ...props }) => {
 
   if (isLoading) {
     return <p className="loader">loading...</p>;
+  }
+
+  if (error) {
+    return (
+      <div>
+        <p>
+          Please go back and enter a valid country name. Make sure the spelling
+          is correct, you are adding the necessary spaces, etc.
+        </p>
+        <Button style={styles.backBtn} variant="text" onClick={backToForm}>
+          Back
+        </Button>
+      </div>
+    );
   }
 
   return (
