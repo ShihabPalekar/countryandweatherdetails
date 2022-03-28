@@ -1,9 +1,8 @@
-.input-form{
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    padding: 150px 100px;
-    width: 25vw;
+body{
+    background-color: rgb(240, 243, 247);
+}
+
+.app{
     margin: 0;
     position: absolute;
     top: 50%;
@@ -11,8 +10,20 @@
     transform: translate(-50%, -50%);
 }
 
+.input-form{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 150px 100px;
+    width: 25vw;
+}
+
 .input-form > button {
     margin-top: 60px;
     width: 200px;
     align-self: center;
+}
+
+.info-container{
+    background-color: white;
 }

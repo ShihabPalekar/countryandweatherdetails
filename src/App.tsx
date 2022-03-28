@@ -1,4 +1,3 @@
-import "./styles/app.css"
 import { Routes, Route, useSearchParams } from "react-router-dom"
 import Info from "./pages/Info"
 import InputForm from "./pages/InputForm"

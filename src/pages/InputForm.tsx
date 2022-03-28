@@ -1,6 +1,5 @@
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
-import "../styles/inputForm.css";
 
 type Props = {
   navigate: any;
